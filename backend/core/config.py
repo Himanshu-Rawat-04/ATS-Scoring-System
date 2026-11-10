@@ -6,7 +6,7 @@ from pathlib import Path
 # silently under uvicorn reload, leaving env vars unset.
 try:
     from dotenv import load_dotenv
-    _ENV_PATH = Path(__file__).resolve().parents[2] / '.env'
+    _ENV_PATH = Path(__file__).resolve().parents[1] / '.env'
     load_dotenv(_ENV_PATH)
 except ImportError:
     pass
@@ -33,8 +33,8 @@ SUPPORTED_MIME_TYPES = {
 
 SUPPORTED_EXTENSIONS = {'.pdf', '.doc', '.docx'}
 
-SPACY_MODEL_PRIMARY="en_core_web_md" #better accuracy
-SPACY_MODEL_SECONDARY='"en_core_web_sm' 
+SPACY_MODEL_PRIMARY = os.getenv("SPACY_MODEL_PRIMARY", "en_core_web_sm")
+SPACY_MODEL_SECONDARY = os.getenv("SPACY_MODEL_SECONDARY", "en_core_web_sm")
 SENTENCE_TRANSFORMER_MODEL = os.getenv("SENTENCE_TRANSFORMER_MODEL", "all-MiniLM-L6-v2")
 
 # Score component weights — this is business logic treated as config
